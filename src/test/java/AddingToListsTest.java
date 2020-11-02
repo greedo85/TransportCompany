@@ -23,7 +23,14 @@ public class AddingToListsTest {
     {
         //given
         TransportCompany transportCompany=new TransportCompany();
-        Car car1 = new Car()
+        Car car1 = new Car("Volvo","WK6442");
+
+        //when
+        transportCompany.addCar(car1);
+
+        //then
+        assertTrue(transportCompany.getCarList().contains(car1));
+
 
     }
 }
