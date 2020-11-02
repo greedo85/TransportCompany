@@ -3,7 +3,7 @@
 Projekt ma umożliwiać przypisywanie kierowcy do samochodu w przykładowej firmie transportowej
 
 [![MIT licensed][shield-mit]](LICENSE)
-[![Java v1.8][shield-java]](https://openjdk.java.net/projects/jdk/11/)
+[![Java v1.8][shield-java]]()
 
 
 ## Wymagania
