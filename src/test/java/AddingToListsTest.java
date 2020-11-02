@@ -15,6 +15,15 @@ public class AddingToListsTest {
 
         //then
         assertTrue(transportCompany.getDriverList().contains(driver1));
-        
+
+    }
+
+    @Test
+    public void addCarTest()
+    {
+        //given
+        TransportCompany transportCompany=new TransportCompany();
+        Car car1 = new Car()
+
     }
 }

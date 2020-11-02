@@ -3,9 +3,9 @@
 Projekt ma umożliwiać przypisywanie kierowcy do samochodu w przykładowej firmie transportowej
 
 [![MIT licensed][shield-mit]](LICENSE)
-[![Java v1.8]<a href="https://coveralls.io/github/badges/shields">
+<a href="https://www.oracle.com/pl/java/technologies/javase/javase-jdk8-downloads.html">
         <img src="https://img.shields.io/badge/java-1.8-green"
-            alt="coverage"></a>(https://www.oracle.com/pl/java/technologies/javase/javase-jdk8-downloads.html)
+            alt="java_1.8"></a>
 
 
 ## Wymagania
