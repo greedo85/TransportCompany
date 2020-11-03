@@ -19,15 +19,23 @@ public class TransportCompany {
         this.map = new HashMap<>();
     }
 
-    public void addCarDriver( CarDriver carDriver ) {
-        carDriverList.add(carDriver);
+    public boolean addCarDriver( CarDriver carDriver ) {
+       return carDriverList.add(carDriver);
     }
 
-    public void addCar( Car car ) {
-        carList.add(car);
+    public boolean addCar( Car car ) {
+       return carList.add(car);
     }
 
     public void addToMap( Car car, CarDriver carDriver ) {
         map.putIfAbsent(car, carDriver);
+    }
+
+    public void printCars() {
+        System.out.println(carList);
+    }
+
+    public void printCarDrivers() {
+        System.out.println(carDriverList);
     }
 }
