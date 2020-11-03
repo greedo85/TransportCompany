@@ -46,7 +46,6 @@ public class Main {
                     name=scanner.nextLine();
                     System.out.println("Podaj nazwisko:");
                     surname=scanner.nextLine();
-
                     System.out.println("Podaj markę:");
                     scanner.nextLine();
                     brand=scanner.nextLine();
