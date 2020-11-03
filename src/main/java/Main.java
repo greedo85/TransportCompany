@@ -49,7 +49,7 @@ public class Main {
                     System.out.println("Podaj markę:");
                     scanner.nextLine();
                     brand=scanner.nextLine();
-
+                    
                     break;
             }
         }
