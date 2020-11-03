@@ -1,6 +1,8 @@
 import org.junit.Test;
 import org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolver;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class AddingToListsTest {
 
     @Test
@@ -23,7 +25,7 @@ public class AddingToListsTest {
     {
         //given
         TransportCompany transportCompany=new TransportCompany();
-        Car car1 = new Car("Volvo","WK6442");
+        Car car1 = new Car("Volvo");
 
         //when
         transportCompany.addCar(car1);
