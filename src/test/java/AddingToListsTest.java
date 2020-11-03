@@ -1,5 +1,4 @@
 import org.junit.Test;
-import org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolver;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,13 +9,13 @@ public class AddingToListsTest {
     {
         //given
         TransportCompany transportCompany=new TransportCompany();
-        Driver driver1=new Driver("Mariusz","Janowski");
+        CarDriver carDriver1 =new CarDriver("Mariusz","Janowski");
 
         //when
-        transportCompany.addDriver(driver1);
+        transportCompany.addCarDriver(carDriver1);
 
         //then
-        assertTrue(transportCompany.getDriverList().contains(driver1));
+        assertTrue(transportCompany.getCarDriverList().contains(carDriver1));
 
     }
 
@@ -32,7 +31,6 @@ public class AddingToListsTest {
 
         //then
         assertTrue(transportCompany.getCarList().contains(car1));
-
 
     }
 }

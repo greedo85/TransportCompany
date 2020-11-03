@@ -7,16 +7,16 @@ import java.util.List;
 
 public class TransportCompany {
 
-    private List<Driver> driverList;
+    private List<CarDriver> carDriverList;
     private List<Car> carList;
 
     public TransportCompany() {
-        this.driverList = new ArrayList<>();
+        this.carDriverList = new ArrayList<>();
         this.carList = new ArrayList<>();
     }
 
-    public void addDriver( Driver driver ) {
-        driverList.add(driver);
+    public void addCarDriver( CarDriver carDriver ) {
+        carDriverList.add(carDriver);
     }
 
     public void addCar( Car car ) {
