@@ -28,7 +28,13 @@ public class TransportCompany {
     }
 
     public void addToMap( Car car, CarDriver carDriver ) {
-        map.putIfAbsent(car, carDriver);
+        if (car != null && carDriver != null) {
+            map.putIfAbsent(car, carDriver);
+        } else if (carDriver == null)
+            System.out.println("Brak takiego kierowcy");
+        else {
+            System.out.println("Brak takiego samochodu");
+        }
     }
 
     public CarDriver findDriver( String name, String surname ) {
