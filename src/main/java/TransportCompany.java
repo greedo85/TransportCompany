@@ -39,6 +39,10 @@ public class TransportCompany {
         System.out.println(carDriverList);
     }
 
+    public void printMap() {
+        System.out.println(map);
+    }
+
     public CarDriver findDriver( String name, String surname ) {
         CarDriver driver = new CarDriver(name, surname);
         for (CarDriver d : carDriverList) {
