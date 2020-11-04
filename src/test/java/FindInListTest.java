@@ -18,6 +18,7 @@ public class FindInListTest {
         //then
         assertEquals(driver3,carDriver2);
     }
+    @Test
     public void findCarTest()
     {
         //given
@@ -27,7 +28,10 @@ public class FindInListTest {
         //when
         transportCompany.addCar(car1);
         transportCompany.addCar(car2);
-        Car car3 = transportCompany.findCar("Fiat");
+        String plate=car2.getPlateNumber();
+        System.out.println(car2);
+        System.out.println(car2.getPlateNumber());
+        Car car3 = transportCompany.findCar("Fiat",plate);
 
         //then
         assertEquals(car3,car2);

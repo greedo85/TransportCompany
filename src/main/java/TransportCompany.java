@@ -30,6 +30,28 @@ public class TransportCompany {
     public void addToMap( Car car, CarDriver carDriver ) {
         map.putIfAbsent(car, carDriver);
     }
+    public CarDriver findDriver( String name, String surname ) {
+        CarDriver driver = new CarDriver(name, surname);
+        for (CarDriver d : carDriverList) {
+            if (d.equals(driver)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    public Car findCar(String brand, String plate)
+    {
+        int iterator=-1;
+        for (Car c : carList) {
+            ++iterator;
+            if (brand.equals(carList.get(iterator).getBrand())&&plate.equals(carList.get(iterator).getPlateNumber())) {
+                return carList.get(iterator);
+            }
+        }
+        return null;
+
+    }
 
     public void printCars() {
         System.out.println(carList);
@@ -43,13 +65,4 @@ public class TransportCompany {
         System.out.println(map);
     }
 
-    public CarDriver findDriver( String name, String surname ) {
-        CarDriver driver = new CarDriver(name, surname);
-        for (CarDriver d : carDriverList) {
-            if (d.equals(driver)) {
-                return d;
-            }
-        }
-        return null;
-    }
 }
