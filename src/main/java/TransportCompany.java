@@ -48,10 +48,10 @@ public class TransportCompany {
     }
 
     public Car findCar( String brand, String plate ) {
-        int iterator = -1;
+
         for (Car c : carList) {
-            ++iterator;
-            if (brand.equals(carList.get(iterator).getBrand()) && plate.equals(carList.get(iterator).getPlateNumber())) {
+
+            if (brand.equals(c.getBrand()) && plate.equals(c.getPlateNumber())) {
                 return c;
             }
         }

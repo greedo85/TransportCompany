@@ -5,11 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AddingToListsTest {
 
     @Test
-    public void addDriverTest()
-    {
+    public void addDriverTest() {
         //given
-        TransportCompany transportCompany=new TransportCompany();
-        CarDriver carDriver1 =new CarDriver("Mariusz","Janowski");
+        TransportCompany transportCompany = new TransportCompany();
+        CarDriver carDriver1 = new CarDriver("Mariusz", "Janowski");
 
         //when
         transportCompany.addCarDriver(carDriver1);
@@ -20,10 +19,9 @@ public class AddingToListsTest {
     }
 
     @Test
-    public void addCarTest()
-    {
+    public void addCarTest() {
         //given
-        TransportCompany transportCompany=new TransportCompany();
+        TransportCompany transportCompany = new TransportCompany();
         Car car1 = new Car("Volvo");
 
         //when
