@@ -1,60 +1,90 @@
 import javax.sound.midi.Soundbank;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    static TransportCompany transportCompany = new TransportCompany();
+    static Scanner scanner = new Scanner(System.in);
+    static String name;
+    static String surname;
+    static String brand;
+    static String plate;
 
     public static void main( String[] args ) {
-        TransportCompany transportCompany = new TransportCompany();
-        Scanner scanner = new Scanner(System.in);
-        String name;
-        String surname;
-        String brand;
-        String plate;
+
         char choice;
-        do {
-            System.out.println("1 - dodaj kierowcę");
-            System.out.println("2 - dodaj samochód");
-            System.out.println("3 - wyświetl kierowców");
-            System.out.println("4 - wyświetl samochody");
-            System.out.println("5 - przypisz kierowcę do samochodu");
-            System.out.println("q - wyjdź");
-            choice = scanner.next().charAt(0);
-            switch (choice) {
-                case '1':
-                    System.out.println("Podaj imię:");
-                    scanner.nextLine();
-                    name = scanner.nextLine();
-                    System.out.println("Podaj nazwisko:");
-                    surname = scanner.nextLine();
-                    transportCompany.addCarDriver(new CarDriver(name, surname));
-                    break;
-                case '2':
-                    System.out.println("Podaj markę:");
-                    scanner.nextLine();
-                    brand = scanner.nextLine();
-                    transportCompany.addCar(new Car(brand));
-                    break;
-                case '3':
-                    transportCompany.printCarDrivers();
-                    break;
-                case '4':
-                    transportCompany.printCars();
-                    break;
-                case '5':
-                    System.out.println("Podaj imię:");
-                    scanner.nextLine();
-                    name = scanner.nextLine();
-                    System.out.println("Podaj nazwisko:");
-                    surname = scanner.nextLine();
-                    System.out.println("Podaj markę:");
-                    brand = scanner.nextLine();
-                    System.out.println("Podaj nr rejestracyjny:");
-                    plate = scanner.nextLine();
-                    transportCompany.addToMap(transportCompany.findCar(brand, plate), transportCompany.findDriver(name, surname));
-                    transportCompany.printMap();
-                    break;
+        try {
+            do {
+                menu();
+                choice = scanner.next().charAt(0);
+                switch (choice) {
+                    case '1':
+                        driverData();
+                        transportCompany.addCarDriver(new CarDriver(name, surname));
+                        break;
+                    case '2':
+                        scanner.nextLine();
+                        carData();
+                        transportCompany.addCar(new Car(brand));
+                        transportCompany.printCars();
+                        break;
+                    case '3':
+                        transportCompany.printCarDrivers();
+                        break;
+                    case '4':
+                        transportCompany.printCars();
+                        break;
+                    case '5':
+                        driverData();
+                        carData();
+                        plateData();
+                        transportCompany.addToMap(transportCompany.findCar(brand, plate), transportCompany.findDriver(name, surname));
+                        transportCompany.printMap();
+                        break;
+                    case '6':
+                        carData();
+                        plateData();
+                        driverData();
+                        transportCompany.replaceDriver(transportCompany.findCar(brand, plate), transportCompany.findDriver(name, surname));
+                        transportCompany.printMap();
+                }
             }
+            while (choice != 'q');
         }
-        while (choice != 'q');
+        catch (InputMismatchException e)
+        {
+            System.out.println("Zły wybór");
+        }
+    }
+
+
+    private static void menu() {
+        System.out.println("1 - dodaj kierowcę");
+        System.out.println("2 - dodaj samochód");
+        System.out.println("3 - wyświetl kierowców");
+        System.out.println("4 - wyświetl samochody");
+        System.out.println("5 - przypisz kierowcę do samochodu");
+        System.out.println("6 - wymień kierowcę");
+        System.out.println("q - wyjdź");
+    }
+
+    public static void driverData() {
+        scanner.nextLine();
+        System.out.println("Podaj imię:");
+        name = scanner.nextLine();
+        System.out.println("Podaj nazwisko:");
+        surname = scanner.nextLine();
+
+    }
+
+    public static void carData() {
+        scanner.nextLine();
+        System.out.println("Podaj markę:");
+        brand = scanner.nextLine();
+    }
+
+    public static void plateData() {
+        System.out.println("Podaj nr rejestracyjny:");
+        plate = scanner.nextLine();
     }
 }

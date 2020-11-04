@@ -37,6 +37,10 @@ public class TransportCompany {
         }
     }
 
+    public void replaceDriver( Car car, CarDriver carDriver ) {
+        map.replace(car, carDriver);
+    }
+
     public CarDriver findDriver( String name, String surname ) {
         CarDriver driver = new CarDriver(name, surname);
         for (CarDriver d : carDriverList) {
@@ -50,13 +54,11 @@ public class TransportCompany {
     public Car findCar( String brand, String plate ) {
 
         for (Car c : carList) {
-
             if (brand.equals(c.getBrand()) && plate.equals(c.getPlateNumber())) {
                 return c;
             }
         }
         return null;
-
     }
 
     public void printCars() {

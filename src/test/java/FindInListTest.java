@@ -28,8 +28,6 @@ public class FindInListTest {
         transportCompany.addCar(car1);
         transportCompany.addCar(car2);
         String plate = car2.getPlateNumber();
-        System.out.println(car2);
-        System.out.println(car2.getPlateNumber());
         Car car3 = transportCompany.findCar("Fiat", plate);
 
         //then

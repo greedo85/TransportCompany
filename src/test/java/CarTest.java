@@ -11,8 +11,7 @@ public class CarTest {
 
         //when
         car1 = new Car("Mazda");
-        System.out.println(car1);
-        System.out.println(car1.getPlateNumber());
+
         //then
         assertEquals(7, car1.getPlateNumber().length());
 
