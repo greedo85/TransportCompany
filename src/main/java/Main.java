@@ -1,4 +1,3 @@
-import javax.sound.midi.Soundbank;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -38,14 +37,14 @@ public class Main {
                         driverData();
                         carData();
                         plateData();
-                        transportCompany.addToMap(transportCompany.findCar(brand, plate), transportCompany.findDriver(name, surname));
+                        transportCompany.addToMap(transportCompany.getCar(brand, plate), transportCompany.getDriver(name, surname));
                         transportCompany.printMap();
                         break;
                     case '6':
                         carData();
                         plateData();
                         driverData();
-                        transportCompany.replaceDriver(transportCompany.findCar(brand, plate), transportCompany.findDriver(name, surname));
+                        transportCompany.replaceDriver(transportCompany.getCar(brand, plate), transportCompany.getDriver(name, surname));
                         transportCompany.printMap();
                 }
             }

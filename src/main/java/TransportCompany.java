@@ -42,7 +42,7 @@ public class TransportCompany {
         map.replace(car, carDriver);
     }
 
-    public CarDriver findDriver( String name, String surname ) {
+    public CarDriver getDriver( String name, String surname ) {
         CarDriver driver = new CarDriver(name, surname);
         for (CarDriver d : carDriverList) {
             if (d.equals(driver)) {
@@ -52,7 +52,7 @@ public class TransportCompany {
         return null;
     }
 
-    public Car findCar( String brand, String plate ) {
+    public Car getCar( String brand, String plate ) {
 
         for (Car c : carList) {
             if (brand.equals(c.getBrand()) && plate.equals(c.getPlateNumber())) {
