@@ -32,9 +32,10 @@ public class TransportCompany {
             map.putIfAbsent(car, carDriver);
         } else if (carDriver == null)
             System.out.println("Brak takiego kierowcy");
-        else {
+        else if (car==null){
             System.out.println("Brak takiego samochodu");
         }
+        else System.out.println("Brak takiego samochodu i kierowcy");
     }
 
     public void replaceDriver( Car car, CarDriver carDriver ) {
