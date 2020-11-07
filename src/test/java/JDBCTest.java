@@ -5,23 +5,32 @@ import java.io.File;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CreateDBTest {
+public class JDBCTest {
 
     @Test
-    public void createDBTest()
-    {
+    public void createDBTest() {
         //given
-        JDBC jdbc=new JDBC();
+        JDBC jdbc = new JDBC();
         String name1 = "transportcompany.db";
-        String name2 = "transportcompany.db";
-        File file1=new File(name1);
+        File file1 = new File(name1);
 
         //when
         jdbc.createDataBase(name1);
-        jdbc.createDataBase(name2);
 
         //then
         assertTrue(file1.exists());
+
+    }
+
+    @Test
+    public void createCarsTable() {
+        //given
+        JDBC jdbc = new JDBC();
+        //when
+        boolean create = jdbc.createCarsTable();
+
+        //then
+        assertTrue(create);
 
     }
 }
