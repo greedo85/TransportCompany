@@ -8,9 +8,10 @@ public class Main {
     static String surname;
     static String brand;
     static String plate;
+    static Car car;
+    static CarDriver carDriver;
 
     public static void main( String[] args ) {
-
         char choice;
         try {
             do {
@@ -24,7 +25,9 @@ public class Main {
                     case '2':
                         scanner.nextLine();
                         carData();
-                        transportCompany.addCar(new Car(brand));
+                        car=new Car(brand);
+                        transportCompany.addCar(car);
+                        transportCompany.jdbc.addToCar(car.getBrand(),car.getPlateNumber());
                         transportCompany.printCars();
                         break;
                     case '3':
@@ -80,6 +83,7 @@ public class Main {
         scanner.nextLine();
         System.out.println("Podaj markę:");
         brand = scanner.nextLine();
+
     }
 
     public static void plateData() {

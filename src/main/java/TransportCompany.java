@@ -12,11 +12,12 @@ public class TransportCompany {
     private List<CarDriver> carDriverList;
     private List<Car> carList;
     private HashMap<Car, CarDriver> map;
-
+    JDBC jdbc=new JDBC();
     public TransportCompany() {
         this.carDriverList = new ArrayList<>();
         this.carList = new ArrayList<>();
         this.map = new HashMap<>();
+        jdbc.createTables();
     }
 
     public boolean addCarDriver( CarDriver carDriver ) {
@@ -61,7 +62,12 @@ public class TransportCompany {
         }
         return null;
     }
-
+    public void addListToCarsTable()
+    {
+        for (Car c:carList) {
+            jdbc.addToCar(c.getBrand(), c.getPlateNumber());
+        }
+    }
     public void printCars() {
         System.out.println(carList);
     }

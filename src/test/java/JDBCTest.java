@@ -23,11 +23,12 @@ public class JDBCTest {
     }
 
     @Test
-    public void createCarsTable() {
+    public void createTablesTest() {
         //given
         JDBC jdbc = new JDBC();
+
         //when
-        boolean create = jdbc.createCarsTable();
+        boolean create = jdbc.createTables();
 
         //then
         assertTrue(create);
