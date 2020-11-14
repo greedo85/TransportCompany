@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class JDBC {
 
-    private static final String url = "jdbc:sqlite:C:\\KursJava\\TransportCompany\\";
+    private static final String url = "jdbc:sqlite:";
     Connection connection;
     Statement statement;
     PreparedStatement preparedStatement;
@@ -50,17 +50,16 @@ public class JDBC {
         }
 
     }
-    public void addToCar(String brand, String plate)
-    {
+
+    public void addToCar( String brand, String plate ) {
         try {
             preparedStatement = connection.prepareStatement("insert into cars values (NULL,?,?);");
-            preparedStatement.setString(1,brand);
-            preparedStatement.setString(2,plate);
+            preparedStatement.setString(1, brand);
+            preparedStatement.setString(2, plate);
             preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+    //public void addToCarDriver(int carID, int Ca)
 }
