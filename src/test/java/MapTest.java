@@ -14,8 +14,8 @@ public class MapTest {
     @BeforeAll
     public static void init() {
         transportCompany = new TransportCompany();
-        carDriver1 = new CarDriver("Adam", "Kowalski");
-        carDriver2 = new CarDriver("Jan", "Matuszewski");
+        carDriver1 = new CarDriver("Adam", "Kowalski","33214134314");
+        carDriver2 = new CarDriver("Jan", "Matuszewski","32432143214");
         car1 = new Car("Volvo");
         car2 = new Car("Fiat");
     }

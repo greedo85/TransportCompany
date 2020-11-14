@@ -1,13 +1,14 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main {
+public class Main_console {
     static TransportCompany transportCompany = new TransportCompany();
     static Scanner scanner = new Scanner(System.in);
     static String name;
     static String surname;
     static String brand;
     static String plate;
+    static String pesel;
     static Car car;
     static CarDriver carDriver;
 
@@ -20,7 +21,7 @@ public class Main {
                 switch (choice) {
                     case '1':
                         driverData();
-                        transportCompany.addCarDriver(new CarDriver(name, surname));
+                        transportCompany.addCarDriver(new CarDriver(name, surname,pesel));
                         break;
                     case '2':
                         scanner.nextLine();
@@ -40,14 +41,14 @@ public class Main {
                         driverData();
                         carData();
                         plateData();
-                        transportCompany.addToMap(transportCompany.getCar(brand, plate), transportCompany.getDriver(name, surname));
+                        transportCompany.addToMap(transportCompany.getCar(brand, plate), transportCompany.getDriver(name, surname,pesel));
                         transportCompany.printMap();
                         break;
                     case '6':
                         carData();
                         plateData();
                         driverData();
-                        transportCompany.replaceDriver(transportCompany.getCar(brand, plate), transportCompany.getDriver(name, surname));
+                        transportCompany.replaceDriver(transportCompany.getCar(brand, plate), transportCompany.getDriver(name, surname,pesel));
                         transportCompany.printMap();
                 }
             }
@@ -76,6 +77,8 @@ public class Main {
         name = scanner.nextLine();
         System.out.println("Podaj nazwisko:");
         surname = scanner.nextLine();
+        System.out.println("Podaj PESEL:");
+        pesel=scanner.nextLine();
 
     }
 

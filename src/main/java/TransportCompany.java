@@ -43,8 +43,8 @@ public class TransportCompany {
         map.replace(car, carDriver);
     }
 
-    public CarDriver getDriver( String name, String surname ) {
-        CarDriver driver = new CarDriver(name, surname);
+    public CarDriver getDriver( String name, String surname, String pesel ) {
+        CarDriver driver = new CarDriver(name, surname,pesel);
         for (CarDriver d : carDriverList) {
             if (d.equals(driver)) {
                 return d;

@@ -8,7 +8,7 @@ public class AddingToListsTest {
     public void addDriverTest() {
         //given
         TransportCompany transportCompany = new TransportCompany();
-        CarDriver carDriver1 = new CarDriver("Mariusz", "Janowski");
+        CarDriver carDriver1 = new CarDriver("Mariusz", "Janowski","333243214");
 
         //when
         transportCompany.addCarDriver(carDriver1);

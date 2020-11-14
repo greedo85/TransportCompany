@@ -8,12 +8,12 @@ public class FindInListTest {
     public void findDriverTest() {
         //given
         TransportCompany transportCompany = new TransportCompany();
-        CarDriver carDriver1 = new CarDriver("Mariusz", "Janowski");
-        CarDriver carDriver2 = new CarDriver("Jan", "Kowalski");
+        CarDriver carDriver1 = new CarDriver("Mariusz", "Janowski","543543252542");
+        CarDriver carDriver2 = new CarDriver("Jan", "Kowalski","341343141");
         //when
         transportCompany.addCarDriver(carDriver1);
         transportCompany.addCarDriver(carDriver2);
-        CarDriver driver3 = transportCompany.getDriver("Jan", "Kowalski");
+        CarDriver driver3 = transportCompany.getDriver("Jan", "Kowalski","32132343214");
         //then
         assertEquals(driver3, carDriver2);
     }
