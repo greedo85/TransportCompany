@@ -14,7 +14,7 @@ public class AddingToListsTest {
         transportCompany.addCarDriver(carDriver1);
 
         //then
-        assertTrue(transportCompany.getCarDriverHashSet().contains(carDriver1));
+        assertTrue(transportCompany.getCarDriverList().contains(carDriver1));
 
     }
 
@@ -28,7 +28,7 @@ public class AddingToListsTest {
         transportCompany.addCar(car1);
 
         //then
-        assertTrue(transportCompany.getCarHashSet().contains(car1));
+        assertTrue(transportCompany.getCarList().contains(car1));
 
     }
 }
