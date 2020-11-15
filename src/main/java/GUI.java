@@ -22,57 +22,81 @@ public class GUI extends Application {
     private Button button2;
     private Button button3;
     private Button button4;
+    private Button button5;
     private Label label1;
     private Label label2;
     private Label label3;
+    private Label label4;
     private BorderPane borderPane;
     private HBox hBox;
     private Scene scene;
-    private VBox vBox;
+    private VBox vBoxDriver;
+    private VBox vBoxCar;
     private TextField textField1;
     private TextField textField2;
     private TextField textField3;
+    private TextField textField4;
+    private TextField textField5;
+    private TextField textField6;
     private Text text;
     private TextArea textArea;
     TransportCompany transportCompany;
+
     public GUI() {
-        transportCompany=new TransportCompany();
+        transportCompany = new TransportCompany();
         hBox = addHbox();
-        vBox = addVbox();
+        vBoxDriver = addDriverVbox();
+        vBoxCar = addCarVbox();
         //dodajemy layout
         borderPane = new BorderPane();
         textArea = new TextArea();
+        textArea.setMaxWidth(380);
         //ustawiamy elementy layoutu
         borderPane.setTop(hBox);
-        borderPane.setLeft(vBox);
-        borderPane.setCenter(textArea);
+        borderPane.setLeft(vBoxDriver);
+        borderPane.setCenter(vBoxCar);
+        borderPane.setRight(textArea);
     }
 
     @Override
     public void start( Stage stage ) throws Exception {
         stage.setTitle("Transport Company");
-        scene = new Scene(borderPane, 400, 500);
+        scene = new Scene(borderPane, 670, 500);
         stage.setScene(scene);
         stage.show();
-        button1.setOnAction(x -> transportCompany.addCarDriver(new CarDriver (textField1.getText(),textField2.getText(),textField3.getText())));
+        button1.setOnAction(driver -> {
+            transportCompany.addCarDriver(new CarDriver(textField1.getText(), textField2.getText(), textField3.getText()));
+            if (true) {
+                textArea.appendText("Dodałem kierowcę");
+            }
+        });
         button2.setOnAction(x -> clearTextArea());
-        button3.setOnAction(x-> setTextArea(transportCompany.getCarDriverList()));
+        button3.setOnAction(x -> setTextArea(transportCompany.getCarDriverHashSet()));
+        button4.setOnAction(car -> {
+            transportCompany.addCar(new Car(textField4.getText()));
+            if (true) {
+                textArea.appendText("Dodałem samochód");
+            }
+
+        });
+        button5.setOnAction(c -> setTextArea(transportCompany.getCarHashSet()));
     }
 
     public HBox addHbox() {
-        text = new Text("To jest Hbox");
+        text = new Text("Dodaj:");
         text.setFont(Font.font(14));
-        button3=new Button("Pokaż kierowców");
+        button3 = new Button("Pokaż kierowców");
+        button5 = new Button("Pokaż samochody");
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(15, 12, 15, 12));
         hBox.setSpacing(10.0);
-        hBox.setAlignment(Pos.BASELINE_LEFT);
-        hBox.getChildren().addAll(button3);
+        hBox.setAlignment(Pos.CENTER_RIGHT);
+        hBox.getChildren().addAll(button3, button5);
         return hBox;
     }
 
-    public VBox addVbox() {
-        text = new Text("To jest Vbox");
+    public VBox addDriverVbox() {
+        text = new Text("Dodaj kierowcę:");
         text.setFont(Font.font(14));
         label1 = new Label("Podaj imię:");
         label2 = new Label("Podaj nazwisko:");
@@ -82,17 +106,34 @@ public class GUI extends Application {
         textField1 = new TextField();
         textField2 = new TextField();
         textField3 = new TextField();
-        VBox vBox = new VBox();
-        vBox.setPadding(new Insets(10));
-        vBox.setSpacing(5.0);
-        vBox.getChildren().addAll(text, label1,textField1,label2,textField2, label3,textField3, button1, button2);
-        return vBox;
+        VBox vBoxDriver = new VBox();
+        vBoxDriver.setPrefWidth(50);
+        vBoxDriver.setPadding(new Insets(10));
+        vBoxDriver.setSpacing(5.0);
+        vBoxDriver.getChildren().addAll(text, label1, textField1, label2, textField2, label3, textField3, button1, button2);
+        return vBoxDriver;
+    }
+
+    public VBox addCarVbox() {
+        text = new Text("Dodaj Samochód:");
+        text.setFont(Font.font(14));
+        label4 = new Label("Podaj Markę:");
+        button4 = new Button("Dodaj Samochód");
+        textField4 = new TextField();
+        textField5 = new TextField();
+        textField6 = new TextField();
+        VBox vBoxCar = new VBox();
+        vBoxCar.setMaxWidth(50);
+        vBoxCar.setPadding(new Insets(10));
+        vBoxCar.setSpacing(5.0);
+        vBoxCar.getChildren().addAll(text, label4, textField4, button4);
+        return vBoxCar;
     }
 
     public void setTextArea( Collection collection ) {
         textArea.clear();
         if (text != null) {
-            textArea.appendText(collection+ "\n");
+            textArea.appendText(collection + "\n");
         }
     }
 

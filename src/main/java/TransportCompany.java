@@ -1,31 +1,29 @@
 import lombok.*;
 
 import java.awt.dnd.DragGestureEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @ToString
 public class TransportCompany {
 
-    private List<CarDriver> carDriverList;
-    private List<Car> carList;
+    private Set<CarDriver> carDriverHashSet;
+    private Set<Car> carHashSet;
     private HashMap<Car, CarDriver> map;
     JDBC jdbc=new JDBC();
     public TransportCompany() {
-        this.carDriverList = new ArrayList<>();
-        this.carList = new ArrayList<>();
+        this.carDriverHashSet = new HashSet<>();
+        this.carHashSet = new HashSet<>();
         this.map = new HashMap<>();
         jdbc.createTables();
     }
 
     public boolean addCarDriver( CarDriver carDriver ) {
-        return carDriverList.add(carDriver);
+        return carDriverHashSet.add(carDriver);
     }
 
     public boolean addCar( Car car ) {
-        return carList.add(car);
+        return carHashSet.add(car);
     }
 
     public void addToMap( Car car, CarDriver carDriver ) {
@@ -45,7 +43,7 @@ public class TransportCompany {
 
     public CarDriver getDriver( String name, String surname, String pesel ) {
         CarDriver driver = new CarDriver(name, surname,pesel);
-        for (CarDriver d : carDriverList) {
+        for (CarDriver d : carDriverHashSet) {
             if (d.equals(driver)) {
                 return d;
             }
@@ -55,7 +53,7 @@ public class TransportCompany {
 
     public Car getCar( String brand, String plate ) {
 
-        for (Car c : carList) {
+        for (Car c : carHashSet) {
             if (brand.equals(c.getBrand()) && plate.equals(c.getPlateNumber())) {
                 return c;
             }
@@ -64,16 +62,16 @@ public class TransportCompany {
     }
     public void addListToCarsTable()
     {
-        for (Car c:carList) {
+        for (Car c:carHashSet) {
             jdbc.addToCar(c.getBrand(), c.getPlateNumber());
         }
     }
     public void printCars() {
-        System.out.println(carList);
+        System.out.println(carHashSet);
     }
 
     public void printCarDrivers() {
-        System.out.println(carDriverList);
+        System.out.println(carDriverHashSet);
     }
 
     public void printMap() {
