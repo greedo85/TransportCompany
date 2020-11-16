@@ -61,7 +61,7 @@ public class GUI extends Application {
     @Override
     public void start( Stage stage ) throws Exception {
         stage.setTitle("Transport Company");
-        scene = new Scene(borderPane, 670, 500);
+        scene = new Scene(borderPane, 670, 400);
         stage.setScene(scene);
         stage.show();
         button1.setOnAction(driver -> {
