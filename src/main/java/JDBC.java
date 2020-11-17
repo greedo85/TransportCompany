@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JDBC {
 
@@ -10,6 +12,7 @@ public class JDBC {
     ResultSet resultSet;
 
     public JDBC() {
+        //transportCompany=new TransportCompany();
         createDataBase("transportcompany.db");
         try {
             statement = connection.createStatement();
@@ -61,5 +64,35 @@ public class JDBC {
             System.out.println(e.getMessage());
         }
     }
+    public void addToDriver( String name, String surname, String pesel ) {
+        try {
+            preparedStatement = connection.prepareStatement("insert into drivers values (NULL,?,?,?);");
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setString(3, pesel);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     //public void addToCarDriver(int carID, int Ca)
+
+    public Set getDriversFromDB() {
+        Set<CarDriver> drivers = new HashSet<>();
+        String getFromDrivers = "SELECT name, surname, pesel FROM drivers";
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(getFromDrivers);
+
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                String pesel = resultSet.getString("pesel");
+                drivers.add(new CarDriver(name, surname, pesel));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return drivers;
+    }
 }

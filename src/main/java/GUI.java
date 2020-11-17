@@ -90,6 +90,7 @@ public class GUI extends Application {
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(15, 12, 15, 12));
         hBox.setSpacing(10.0);
+        hBox.setStyle("-fx-background-color: #336688;");
         hBox.setAlignment(Pos.CENTER_RIGHT);
         hBox.getChildren().addAll(button3, button5);
         return hBox;

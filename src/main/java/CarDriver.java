@@ -2,7 +2,7 @@ import lombok.*;
 
 @AllArgsConstructor
 @EqualsAndHashCode
-
+@Getter
 public class CarDriver {
 
     private String name;

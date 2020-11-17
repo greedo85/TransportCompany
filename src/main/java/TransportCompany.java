@@ -5,24 +5,29 @@ import java.util.*;
 
 @Getter
 @ToString
+
 public class TransportCompany {
 
     private Set<CarDriver> carDriverHashSet;
     private Set<Car> carHashSet;
     private HashMap<Car, CarDriver> map;
-    JDBC jdbc=new JDBC();
+    private JDBC jdbc;
     public TransportCompany() {
-        this.carDriverHashSet = new HashSet<>();
+        jdbc=new JDBC();
+        jdbc.createTables();
+        this.carDriverHashSet = jdbc.getDriversFromDB();
         this.carHashSet = new HashSet<>();
         this.map = new HashMap<>();
-        jdbc.createTables();
+
     }
 
     public boolean addCarDriver( CarDriver carDriver ) {
-        return carDriverHashSet.add(carDriver);
+        jdbc.addToDriver(carDriver.get);
+        return carDriverHashSet.addAll(Arrays.asList(carDriver));
     }
 
     public boolean addCar( Car car ) {
+        jdbc.addToCar(car.getBrand(),car.getPlateNumber());
         return carHashSet.add(car);
     }
 
