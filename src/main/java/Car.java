@@ -1,19 +1,15 @@
 import lombok.*;
 
 import java.util.Random;
-@ToString
+
 @Getter
 @EqualsAndHashCode
+@AllArgsConstructor
 public class Car {
     private String brand;
     private String plateNumber;
 
-    public Car( String brand ) {
-        this.brand = brand;
-        this.plateNumber = generatePlateNumber();
-    }
-
-    public String generatePlateNumber() {
+   /* public String generatePlateNumber() {
         int max;
         int min;
         String number="";
@@ -28,5 +24,12 @@ public class Car {
             number += (char)( min + (int) (Math.random() * ((max - min) + 1)));
         }
         return number;
+    }*/
+
+    @Override
+    public String toString() {
+        return "\nSamochód:\n" +
+                "Marka: " + brand + '\n' +
+                "Nr rejestracyjny: " + plateNumber ;
     }
 }

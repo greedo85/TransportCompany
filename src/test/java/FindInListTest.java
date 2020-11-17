@@ -22,8 +22,8 @@ public class FindInListTest {
     public void findCarTest() {
         //given
         TransportCompany transportCompany = new TransportCompany();
-        Car car1 = new Car("Audi");
-        Car car2 = new Car("Fiat");
+        Car car1 = new Car("Audi","s2321321");
+        Car car2 = new Car("Fiat","21321213");
         //when
         transportCompany.addCar(car1);
         transportCompany.addCar(car2);

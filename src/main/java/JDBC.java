@@ -95,4 +95,23 @@ public class JDBC {
         }
         return drivers;
     }
+
+    public Set getCarsFromDB() {
+        Set<Car> cars = new HashSet<>();
+        String getFromDrivers = "SELECT brand, plate_nr FROM cars";
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(getFromDrivers);
+
+            while (resultSet.next()) {
+                String brand = resultSet.getString("brand");
+                String plate_nr = resultSet.getString("plate_nr");
+
+                cars.add(new Car(brand,plate_nr));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return cars;
+    }
 }

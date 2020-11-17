@@ -4,7 +4,7 @@ import java.awt.dnd.DragGestureEvent;
 import java.util.*;
 
 @Getter
-@ToString
+
 
 public class TransportCompany {
 
@@ -16,13 +16,13 @@ public class TransportCompany {
         jdbc=new JDBC();
         jdbc.createTables();
         this.carDriverHashSet = jdbc.getDriversFromDB();
-        this.carHashSet = new HashSet<>();
+        this.carHashSet = jdbc.getCarsFromDB();
         this.map = new HashMap<>();
 
     }
 
     public boolean addCarDriver( CarDriver carDriver ) {
-        jdbc.addToDriver(carDriver.get);
+        jdbc.addToDriver(carDriver.getName(),carDriver.getSurname(),carDriver.getPesel());
         return carDriverHashSet.addAll(Arrays.asList(carDriver));
     }
 

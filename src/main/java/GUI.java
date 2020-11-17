@@ -18,26 +18,14 @@ import java.util.Collection;
 
 public class GUI extends Application {
 
-    private Button button1;
-    private Button button2;
-    private Button button3;
-    private Button button4;
-    private Button button5;
-    private Label label1;
-    private Label label2;
-    private Label label3;
-    private Label label4;
+    private Button button1, button2, button3, button4, button5;
+    private Label label1, label2, label3, label4, label5;
     private BorderPane borderPane;
     private HBox hBox;
     private Scene scene;
-    private VBox vBoxDriver;
-    private VBox vBoxCar;
-    private TextField textField1;
-    private TextField textField2;
-    private TextField textField3;
-    private TextField textField4;
-    private TextField textField5;
-    private TextField textField6;
+    private VBox vBoxDriver, vBoxCar;
+
+    private TextField textField1, textField2, textField3, textField4, textField5, textField6;
     private Text text;
     private TextArea textArea;
     TransportCompany transportCompany;
@@ -65,18 +53,20 @@ public class GUI extends Application {
         stage.setScene(scene);
         stage.show();
         button1.setOnAction(driver -> {
-            transportCompany.addCarDriver(new CarDriver(textField1.getText(), textField2.getText(), textField3.getText()));
-            if (true) {
+
+            if (transportCompany.addCarDriver(new CarDriver(textField1.getText(), textField2.getText(), textField3.getText()))) {
                 textArea.appendText("Dodałem kierowcę");
-            }
+            } else
+                textArea.appendText("Nie mogę dodać kierowcy, już istnieje");
+
         });
         button2.setOnAction(x -> clearTextArea());
         button3.setOnAction(x -> setTextArea(transportCompany.getCarDriverHashSet()));
         button4.setOnAction(car -> {
-            transportCompany.addCar(new Car(textField4.getText()));
-            if (true) {
+            if (transportCompany.addCar(new Car(textField4.getText(), textField5.getText()))) {
                 textArea.appendText("Dodałem samochód");
-            }
+            } else
+                textArea.appendText("Nie mogę dodać samochodu");
 
         });
         button5.setOnAction(c -> setTextArea(transportCompany.getCarHashSet()));
@@ -119,6 +109,7 @@ public class GUI extends Application {
         text = new Text("Dodaj Samochód:");
         text.setFont(Font.font(14));
         label4 = new Label("Podaj Markę:");
+        label5 = new Label("Podaj nr rejestracyjny");
         button4 = new Button("Dodaj Samochód");
         textField4 = new TextField();
         textField5 = new TextField();
@@ -127,7 +118,7 @@ public class GUI extends Application {
         vBoxCar.setMaxWidth(50);
         vBoxCar.setPadding(new Insets(10));
         vBoxCar.setSpacing(5.0);
-        vBoxCar.getChildren().addAll(text, label4, textField4, button4);
+        vBoxCar.getChildren().addAll(text, label4, textField4, label5, textField5, button4);
         return vBoxCar;
     }
 

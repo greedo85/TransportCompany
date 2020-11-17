@@ -22,7 +22,7 @@ public class AddingToListsTest {
     public void addCarTest() {
         //given
         TransportCompany transportCompany = new TransportCompany();
-        Car car1 = new Car("Volvo");
+        Car car1 = new Car("Volvo","324321212");
 
         //when
         transportCompany.addCar(car1);
