@@ -1,10 +1,10 @@
+package transportcompany;
+
 import lombok.*;
 
-import java.awt.dnd.DragGestureEvent;
 import java.util.*;
 
 @Getter
-
 
 public class TransportCompany {
 
@@ -12,8 +12,9 @@ public class TransportCompany {
     private Set<Car> carHashSet;
     private HashMap<Car, CarDriver> map;
     private JDBC jdbc;
+
     public TransportCompany() {
-        jdbc=new JDBC();
+        jdbc = new JDBC();
         jdbc.createTables();
         this.carDriverHashSet = jdbc.getDriversFromDB();
         this.carHashSet = jdbc.getCarsFromDB();
@@ -22,12 +23,12 @@ public class TransportCompany {
     }
 
     public boolean addCarDriver( CarDriver carDriver ) {
-        jdbc.addToDriver(carDriver.getName(),carDriver.getSurname(),carDriver.getPesel());
+        jdbc.addToDriver(carDriver.getName(), carDriver.getSurname(), carDriver.getPesel());
         return carDriverHashSet.addAll(Arrays.asList(carDriver));
     }
 
     public boolean addCar( Car car ) {
-        jdbc.addToCar(car.getBrand(),car.getPlateNumber());
+        jdbc.addToCar(car.getBrand(), car.getPlateNumber());
         return carHashSet.add(car);
     }
 
@@ -36,10 +37,9 @@ public class TransportCompany {
             map.putIfAbsent(car, carDriver);
         } else if (carDriver == null)
             System.out.println("Brak takiego kierowcy");
-        else if (car==null){
+        else if (car == null) {
             System.out.println("Brak takiego samochodu");
-        }
-        else System.out.println("Brak takiego samochodu i kierowcy");
+        } else System.out.println("Brak takiego samochodu i kierowcy");
     }
 
     public void replaceDriver( Car car, CarDriver carDriver ) {
@@ -47,7 +47,7 @@ public class TransportCompany {
     }
 
     public CarDriver getDriver( String name, String surname, String pesel ) {
-        CarDriver driver = new CarDriver(name, surname,pesel);
+        CarDriver driver = new CarDriver(name, surname, pesel);
         for (CarDriver d : carDriverHashSet) {
             if (d.equals(driver)) {
                 return d;
@@ -65,12 +65,13 @@ public class TransportCompany {
         }
         return null;
     }
-    public void addListToCarsTable()
-    {
-        for (Car c:carHashSet) {
+
+    public void addListToCarsTable() {
+        for (Car c : carHashSet) {
             jdbc.addToCar(c.getBrand(), c.getPlateNumber());
         }
     }
+
     public void printCars() {
         System.out.println(carHashSet);
     }

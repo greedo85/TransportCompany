@@ -1,18 +1,22 @@
-
+package GUI;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.scene.text.Text;
-
+import javafx.stage.Stage;
+import transportcompany.Car;
+import transportcompany.CarDriver;
+import transportcompany.TransportCompany;
 import java.util.Collection;
 
 
@@ -24,14 +28,23 @@ public class GUI extends Application {
     private HBox hBox;
     private Scene scene;
     private VBox vBoxDriver, vBoxCar;
-
     private TextField textField1, textField2, textField3, textField4, textField5, textField6;
     private Text text;
     private TextArea textArea;
     TransportCompany transportCompany;
+    private TableColumn<Car,String> brandTable, plateTable;
+    private TableColumn<CarDriver, String>nameTable,surnameTable,peselTable;
+    private ObservableList<Car>carData;
+    private ObservableList<CarDriver>driverData;
+    private TableView <Car>carTableView;
+    private TableView <CarDriver>carDriverTableView;
+    private TableColumn tableColumn;
 
     public GUI() {
         transportCompany = new TransportCompany();
+        carData= getCarData();
+        driverData= getDriverData();
+        addDriverTable();
         hBox = addHbox();
         vBoxDriver = addDriverVbox();
         vBoxCar = addCarVbox();
@@ -43,7 +56,8 @@ public class GUI extends Application {
         borderPane.setTop(hBox);
         borderPane.setLeft(vBoxDriver);
         borderPane.setCenter(vBoxCar);
-        borderPane.setRight(textArea);
+        borderPane.setRight(carDriverTableView);
+        borderPane.setBottom(textArea);
     }
 
     @Override
@@ -77,12 +91,13 @@ public class GUI extends Application {
         text.setFont(Font.font(14));
         button3 = new Button("Pokaż kierowców");
         button5 = new Button("Pokaż samochody");
+        button2 = new Button("Wyczyść textArea");
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(15, 12, 15, 12));
         hBox.setSpacing(10.0);
         hBox.setStyle("-fx-background-color: #336688;");
         hBox.setAlignment(Pos.CENTER_RIGHT);
-        hBox.getChildren().addAll(button3, button5);
+        hBox.getChildren().addAll(button3, button5,button2);
         return hBox;
     }
 
@@ -93,7 +108,7 @@ public class GUI extends Application {
         label2 = new Label("Podaj nazwisko:");
         label3 = new Label("Podaj PESEL:");
         button1 = new Button("Dodaj kierowcę");
-        button2 = new Button("Wyczyść textArea");
+
         textField1 = new TextField();
         textField2 = new TextField();
         textField3 = new TextField();
@@ -101,7 +116,7 @@ public class GUI extends Application {
         vBoxDriver.setPrefWidth(50);
         vBoxDriver.setPadding(new Insets(10));
         vBoxDriver.setSpacing(5.0);
-        vBoxDriver.getChildren().addAll(text, label1, textField1, label2, textField2, label3, textField3, button1, button2);
+        vBoxDriver.getChildren().addAll(text, label1, textField1, label2, textField2, label3, textField3, button1);
         return vBoxDriver;
     }
 
@@ -120,6 +135,32 @@ public class GUI extends Application {
         vBoxCar.setSpacing(5.0);
         vBoxCar.getChildren().addAll(text, label4, textField4, label5, textField5, button4);
         return vBoxCar;
+    }
+
+    public ObservableList<Car>getCarData()
+    {
+        ObservableList<Car> cars= FXCollections.observableArrayList();
+        cars.addAll(transportCompany.getCarHashSet());
+        return cars;
+    }
+    public ObservableList<CarDriver>getDriverData()
+    {
+        ObservableList <CarDriver >drivers=FXCollections.observableArrayList();
+        drivers.addAll(transportCompany.getCarDriverHashSet());
+        return drivers;
+    }
+    public void addDriverTable()
+    {
+        nameTable=new TableColumn<>("Imię");
+        nameTable.setCellValueFactory(new PropertyValueFactory<>("name"));
+        surnameTable=new TableColumn<>("Nazwisko");
+        surnameTable.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        peselTable=new TableColumn<>("PESEL");
+        peselTable.setCellValueFactory(new PropertyValueFactory<>("pesel"));
+        carDriverTableView=new TableView<>();
+        carDriverTableView.setEditable(true);
+        carDriverTableView.setItems(driverData);
+        carDriverTableView.getColumns().addAll(nameTable,surnameTable,peselTable);
     }
 
     public void setTextArea( Collection collection ) {

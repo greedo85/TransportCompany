@@ -1,3 +1,5 @@
+package transportcompany;
+
 import lombok.*;
 
 @AllArgsConstructor

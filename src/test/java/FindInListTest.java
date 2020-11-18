@@ -1,4 +1,7 @@
 import org.junit.Test;
+import transportcompany.Car;
+import transportcompany.CarDriver;
+import transportcompany.TransportCompany;
 
 import static org.junit.Assert.assertEquals;
 

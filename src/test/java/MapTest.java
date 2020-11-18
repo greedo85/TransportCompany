@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.*;
+import transportcompany.Car;
+import transportcompany.CarDriver;
+import transportcompany.TransportCompany;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

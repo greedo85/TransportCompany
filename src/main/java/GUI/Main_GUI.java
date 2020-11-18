@@ -1,4 +1,4 @@
-import javafx.application.Application;
+package GUI;
 
 public class Main_GUI extends GUI {
 
