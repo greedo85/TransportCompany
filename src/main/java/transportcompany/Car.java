@@ -1,8 +1,8 @@
 package transportcompany;
 
-import lombok.*;
-
-import java.util.Random;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode

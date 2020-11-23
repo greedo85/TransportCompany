@@ -66,6 +66,7 @@ public class JDBC {
             System.out.println(e.getMessage());
         }
     }
+
     public void addToDriver( String name, String surname, String pesel ) {
         try {
             preparedStatement = connection.prepareStatement("insert into drivers values (NULL,?,?,?);");
@@ -109,7 +110,7 @@ public class JDBC {
                 String brand = resultSet.getString("brand");
                 String plate_nr = resultSet.getString("plate_nr");
 
-                cars.add(new Car(brand,plate_nr));
+                cars.add(new Car(brand, plate_nr));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
