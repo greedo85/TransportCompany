@@ -24,7 +24,7 @@ public class TransportCompany {
 
     public boolean addCarDriver( CarDriver carDriver ) {
         jdbc.addToDriver(carDriver.getName(), carDriver.getSurname(), carDriver.getPesel());
-        return carDriverHashSet.addAll(Arrays.asList(carDriver));
+        return carDriverHashSet.add(carDriver);
     }
 
     public boolean addCar( Car car ) {

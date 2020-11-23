@@ -21,6 +21,7 @@ public class TableElements extends BoxElements {
 
 
     public TableElements() {
+        System.out.println("Konstruktor TableElements");
         carData=getCarData();
         driverData=getDriverData();
         addCarTable();

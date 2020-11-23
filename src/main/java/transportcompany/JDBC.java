@@ -14,7 +14,7 @@ public class JDBC {
     ResultSet resultSet;
 
     public JDBC() {
-        //transportCompany=new TransportCompany();
+
         createDataBase("transportcompany.db");
         try {
             statement = connection.createStatement();

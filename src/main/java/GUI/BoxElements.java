@@ -23,6 +23,7 @@ public class BoxElements extends TransportCompany {
     private Text text;
 
     public BoxElements() {
+        System.out.println("Konstruktor BoxElements");
         label1 = new Label("Podaj imię:");
         label2 = new Label("Podaj nazwisko:");
         label3 = new Label("Podaj PESEL:");
