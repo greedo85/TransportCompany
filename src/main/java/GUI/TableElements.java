@@ -21,9 +21,9 @@ public class TableElements extends BoxElements {
 
 
     public TableElements() {
-        System.out.println("Konstruktor TableElements");
-        carData=getCarData();
-        driverData=getDriverData();
+
+        carData = getCarData();
+        driverData = getDriverData();
         addCarTable();
         addDriverTable();
     }
@@ -49,7 +49,7 @@ public class TableElements extends BoxElements {
         peselTable.setCellValueFactory(new PropertyValueFactory<>("pesel"));
         carDriverTableView = new TableView<>();
         carDriverTableView.setEditable(true);
-        carDriverTableView.setPrefSize(300,200);
+        carDriverTableView.setPrefSize(300, 200);
         carDriverTableView.setItems(driverData);
         carDriverTableView.getColumns().addAll(nameTable, surnameTable, peselTable);
         return carDriverTableView;
@@ -62,7 +62,7 @@ public class TableElements extends BoxElements {
         plateTable.setCellValueFactory(new PropertyValueFactory<>("plateNumber"));
         carTableView = new TableView<>();
         carTableView.setEditable(true);
-        carTableView.setPrefSize(300,200);
+        carTableView.setPrefSize(300, 200);
         carTableView.setItems(carData);
         carTableView.getColumns().addAll(brandTable, plateTable);
         return carTableView;

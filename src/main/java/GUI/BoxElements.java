@@ -23,7 +23,6 @@ public class BoxElements extends TransportCompany {
     private Text text;
 
     public BoxElements() {
-        System.out.println("Konstruktor BoxElements");
         label1 = new Label("Podaj imię:");
         label2 = new Label("Podaj nazwisko:");
         label3 = new Label("Podaj PESEL:");
@@ -37,9 +36,9 @@ public class BoxElements extends TransportCompany {
         textField4 = new TextField();
         textField5 = new TextField();
         textField6 = new TextField();
-        hBox=addUpperHbox();
-        vBoxCar=addCarVbox();
-        vBoxDriver=addDriverVbox();
+        hBox = addUpperHbox();
+        vBoxCar = getCarVbox();
+        vBoxDriver = getDriverVbox();
 
     }
 
@@ -58,7 +57,7 @@ public class BoxElements extends TransportCompany {
         return hBox;
     }
 
-    public VBox addDriverVbox() {
+    public VBox getDriverVbox() {
         text = new Text("Dodaj kierowcę:");
         text.setFont(Font.font(14));
         VBox vBoxDriver = new VBox();
@@ -69,7 +68,7 @@ public class BoxElements extends TransportCompany {
         return vBoxDriver;
     }
 
-    public VBox addCarVbox() {
+    public VBox getCarVbox() {
         text = new Text("Dodaj Samochód:");
         text.setFont(Font.font(14));
         VBox vBoxCar = new VBox();

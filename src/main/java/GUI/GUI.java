@@ -18,14 +18,12 @@ public class GUI extends Application {
 
 
     public GUI() {
-        System.out.println("Konstruktor GUI");
 
         tableElements = new TableElements();
-
         //dodajemy layout
         borderPane = new BorderPane();
         textArea = new TextArea();
-        textArea.setMaxWidth(670);
+        textArea.setMaxWidth(scene.getWidth());
         //ustawiamy elementy layoutu
         borderPane.setTop(tableElements.getHBox());
         borderPane.setLeft(tableElements.getVBoxDriver());
@@ -42,22 +40,24 @@ public class GUI extends Application {
         tableElements.getAddDriverButton().setOnAction(driver -> {
 
             if (tableElements.addCarDriver(new CarDriver(
-                    tableElements.getTextField1().getText(), tableElements.getTextField2().getText(),tableElements.getTextField3().getText()))) {
+                    tableElements.getTextField1().getText(), tableElements.getTextField2().getText(), tableElements.getTextField3().getText()))) {
+                textArea.clear();
                 textArea.appendText("Dodałem kierowcę");
             } else
                 textArea.appendText("Nie mogę dodać kierowcy, już istnieje");
 
         });
-       tableElements.getAddCarButton().setOnAction(car -> {
+        tableElements.getAddCarButton().setOnAction(car -> {
             if ((tableElements.addCar(new Car(tableElements.getTextField4().getText(), tableElements.getTextField5().getText())))) {
+                textArea.clear();
                 textArea.appendText("Dodałem samochód");
             } else
                 textArea.appendText("Nie mogę dodać samochodu");
 
         });
-       tableElements.getClearTextAreaButton().setOnAction(x -> clearTextArea());
-       tableElements.getShowDriverInTableButton().setOnAction(x -> borderPane.setRight(tableElements.getCarDriverTableView()));
-       tableElements.getShowCarsInTable().setOnAction(c -> borderPane.setRight(tableElements.getCarTableView()));
+        tableElements.getClearTextAreaButton().setOnAction(x -> clearTextArea());
+        tableElements.getShowDriverInTableButton().setOnAction(x -> borderPane.setRight(tableElements.getCarDriverTableView()));
+        tableElements.getShowCarsInTable().setOnAction(c -> borderPane.setRight(tableElements.getCarTableView()));
 
     }
 
