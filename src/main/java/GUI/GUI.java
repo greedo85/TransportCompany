@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import transportcompany.Car;
 import transportcompany.CarDriver;
 
+import java.util.Collection;
+
 
 public class GUI extends Application {
 
@@ -23,7 +25,7 @@ public class GUI extends Application {
         //dodajemy layout
         borderPane = new BorderPane();
         textArea = new TextArea();
-        textArea.setMaxWidth(scene.getWidth());
+        textArea.setMaxWidth(670);
         //ustawiamy elementy layoutu
         borderPane.setTop(tableElements.getHBox());
         borderPane.setLeft(tableElements.getVBoxDriver());
@@ -56,18 +58,25 @@ public class GUI extends Application {
 
         });
         tableElements.getClearTextAreaButton().setOnAction(x -> clearTextArea());
-        tableElements.getShowDriverInTableButton().setOnAction(x -> borderPane.setRight(tableElements.getCarDriverTableView()));
-        tableElements.getShowCarsInTable().setOnAction(c -> borderPane.setRight(tableElements.getCarTableView()));
+        tableElements.getShowDriverInTableButton().setOnAction(x ->
+        {
+            borderPane.setRight(tableElements.getCarDriverTableView());
+            setTextArea(tableElements.getCarDriverHashSet());
+        });
+        tableElements.getShowCarsInTable().setOnAction(c ->
+        {
+            borderPane.setRight(tableElements.getCarTableView());
+            setTextArea(tableElements.getCarHashSet());
+        });
 
     }
 
 
-   /* public void setTextArea( Collection collection ) {
+    public void setTextArea( Collection collection ) {
         textArea.clear();
-        if (text != null) {
-            textArea.appendText(collection + "\n");
-        }
-    }*/
+        textArea.appendText(collection + "\n");
+
+    }
 
     public void clearTextArea() {
         textArea.clear();

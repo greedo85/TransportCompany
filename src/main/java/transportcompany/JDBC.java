@@ -86,7 +86,6 @@ public class JDBC {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(getFromDrivers);
-
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");

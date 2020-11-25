@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,13 +20,15 @@ public class TableElements extends BoxElements {
     private TableView<Car> carTableView;
     private TableView<CarDriver> carDriverTableView;
 
-
     public TableElements() {
 
         carData = getCarData();
         driverData = getDriverData();
         addCarTable();
         addDriverTable();
+        carTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        carDriverTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     }
 
     public ObservableList<Car> getCarData() {
