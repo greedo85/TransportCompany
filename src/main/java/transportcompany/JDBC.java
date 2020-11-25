@@ -56,41 +56,51 @@ public class JDBC {
 
     }
 
-    public void addToCar( String brand, String plate ) {
+    public boolean addToCar( String brand, String plate ) {
         try {
             preparedStatement = connection.prepareStatement("insert into cars values (NULL,?,?);");
             preparedStatement.setString(1, brand);
             preparedStatement.setString(2, plate);
-            preparedStatement.execute();
+            if (preparedStatement.execute()) {
+                return true;
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
-    public void addToDriver( String name, String surname, String pesel ) {
+    public boolean addToDriver( String name, String surname, String pesel ) {
         try {
             preparedStatement = connection.prepareStatement("insert into drivers values (NULL,?,?,?);");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, surname);
             preparedStatement.setString(3, pesel);
-            preparedStatement.execute();
+            if (preparedStatement.execute()) {
+                return true;
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
-    //public void addToCarDriver(int carID, int Ca)
+
 
     public Set getDriversFromDB() {
         Set<CarDriver> drivers = new HashSet<>();
-        String getFromDrivers = "SELECT name, surname, pesel FROM drivers";
+        String getFromDrivers = "SELECT driver_ID, name, surname, pesel FROM drivers";
+        CarDriver carDriver;
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(getFromDrivers);
             while (resultSet.next()) {
+                int id = resultSet.getInt("driver_ID");
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
                 String pesel = resultSet.getString("pesel");
-                drivers.add(new CarDriver(name, surname, pesel));
+                carDriver = new CarDriver(name, surname, pesel);
+                carDriver.setId(id);
+                drivers.add(carDriver);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

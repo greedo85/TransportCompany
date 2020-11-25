@@ -10,10 +10,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import lombok.Getter;
-import transportcompany.TransportCompany;
 
 @Getter
-public class BoxElements extends TransportCompany {
+public class BoxElements{
 
     private Button addDriverButton, clearTextAreaButton, showDriverInTableButton, addCarButton, showCarsInTable;
     private Label label1, label2, label3, label4, label5;

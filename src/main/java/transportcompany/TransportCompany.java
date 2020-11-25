@@ -24,12 +24,12 @@ public class TransportCompany {
 
     public boolean addCarDriver( CarDriver carDriver ) {
         jdbc.addToDriver(carDriver.getName(), carDriver.getSurname(), carDriver.getPesel());
-        return carDriverHashSet.add(carDriver);
+        return carDriverHashSet.addAll(jdbc.getDriversFromDB());
     }
 
     public boolean addCar( Car car ) {
         jdbc.addToCar(car.getBrand(), car.getPlateNumber());
-        return carHashSet.add(car);
+        return carHashSet.addAll(jdbc.getCarsFromDB());
     }
 
     public void addToMap( Car car, CarDriver carDriver ) {
