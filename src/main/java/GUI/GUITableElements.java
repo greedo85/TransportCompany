@@ -12,17 +12,18 @@ import transportcompany.CarDriver;
 import transportcompany.JDBC;
 
 @Getter
-public class TableElements extends JDBC {
+public class GUITableElements extends JDBC {
 
     private TableColumn<Car, String> brandTable, plateTable;
+    private TableColumn<Car, Integer> carIdTable;
     private TableColumn<CarDriver, String> nameTable, surnameTable, peselTable;
-    private TableColumn<CarDriver,Integer> idTable;
+    private TableColumn<CarDriver,Integer> driverIdTable;
     private ObservableList<Car> carData;
     private ObservableList<CarDriver> driverData;
     private TableView<Car> carTableView;
     private TableView<CarDriver> carDriverTableView;
 
-    public TableElements() {
+    public GUITableElements() {
 
         carData = getCarData();
         driverData = getDriverData();
@@ -46,23 +47,25 @@ public class TableElements extends JDBC {
     }
 
     public TableView<CarDriver> addDriverTable() {
+        driverIdTable =new TableColumn<>("ID");
+        driverIdTable.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameTable = new TableColumn<>("Imię");
         nameTable.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameTable = new TableColumn<>("Nazwisko");
         surnameTable.setCellValueFactory(new PropertyValueFactory<>("surname"));
         peselTable = new TableColumn<>("PESEL");
         peselTable.setCellValueFactory(new PropertyValueFactory<>("pesel"));
-        idTable=new TableColumn<>("ID");
-        idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
         carDriverTableView = new TableView<>();
         carDriverTableView.setEditable(true);
         carDriverTableView.setPrefSize(300, 200);
         carDriverTableView.setItems(driverData);
-        carDriverTableView.getColumns().addAll(idTable, nameTable, surnameTable, peselTable);
+        carDriverTableView.getColumns().addAll(driverIdTable, nameTable, surnameTable, peselTable);
         return carDriverTableView;
     }
 
     public TableView<Car> addCarTable() {
+        carIdTable = new TableColumn<>("ID");
+        carIdTable.setCellValueFactory(new PropertyValueFactory<>("id"));
         brandTable = new TableColumn<>("Marka");
         brandTable.setCellValueFactory(new PropertyValueFactory<>("brand"));
         plateTable = new TableColumn<>("Nr rejestracyjny");
@@ -71,7 +74,7 @@ public class TableElements extends JDBC {
         carTableView.setEditable(true);
         carTableView.setPrefSize(300, 200);
         carTableView.setItems(carData);
-        carTableView.getColumns().addAll(brandTable, plateTable);
+        carTableView.getColumns().addAll(carIdTable, brandTable, plateTable);
         return carTableView;
     }
 }

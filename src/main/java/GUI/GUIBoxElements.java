@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import lombok.Getter;
 
 @Getter
-public class BoxElements{
+public class GUIBoxElements {
 
     private Button addDriverButton, clearTextAreaButton, showDriverInTableButton, addCarButton, showCarsInTable;
     private Label label1, label2, label3, label4, label5;
@@ -21,7 +21,7 @@ public class BoxElements{
     private TextField textField1, textField2, textField3, textField4, textField5, textField6;
     private Text text;
 
-    public BoxElements() {
+    public GUIBoxElements() {
         label1 = new Label("Podaj imię:");
         label2 = new Label("Podaj nazwisko:");
         label3 = new Label("Podaj PESEL:");

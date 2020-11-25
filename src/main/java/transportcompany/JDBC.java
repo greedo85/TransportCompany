@@ -88,13 +88,13 @@ public class JDBC {
 
     public Set getDriversFromDB() {
         Set<CarDriver> drivers = new HashSet<>();
-        String getFromDrivers = "SELECT driver_ID, name, surname, pesel FROM drivers";
+        String getFromDrivers = "SELECT driverID, name, surname, pesel FROM drivers";
         CarDriver carDriver;
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(getFromDrivers);
             while (resultSet.next()) {
-                int id = resultSet.getInt("driver_ID");
+                int id = resultSet.getInt("driverID");
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
                 String pesel = resultSet.getString("pesel");
@@ -110,16 +110,19 @@ public class JDBC {
 
     public Set getCarsFromDB() {
         Set<Car> cars = new HashSet<>();
-        String getFromDrivers = "SELECT brand, plate_nr FROM cars";
+        String getFromDrivers = "SELECT carID, brand, plate_nr FROM cars";
+        Car car;
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(getFromDrivers);
 
             while (resultSet.next()) {
+                int id=resultSet.getInt("carID");
                 String brand = resultSet.getString("brand");
                 String plate_nr = resultSet.getString("plate_nr");
-
-                cars.add(new Car(brand, plate_nr));
+                car =new Car(brand,plate_nr);
+                car.setId(id);
+                cars.add(car);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

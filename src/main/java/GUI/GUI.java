@@ -12,16 +12,16 @@ import java.util.Collection;
 public class GUI extends Application {
 
     private TextArea textArea;
-    private TableElements tableElements;
-    private BoxElements boxElements;
+    private GUITableElements tableElements;
+    private GUIBoxElements boxElements;
     private Scene scene;
     private BorderPane borderPane;
 
 
     public GUI() {
 
-        tableElements = new TableElements();
-        boxElements=new BoxElements();
+        tableElements = new GUITableElements();
+        boxElements=new GUIBoxElements();
         //dodajemy layout
         borderPane = new BorderPane();
         textArea = new TextArea();
