@@ -1,4 +1,7 @@
 import org.junit.Test;
+import transportcompany.Car;
+import transportcompany.CarDriver;
+import transportcompany.TransportCompany;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,13 +11,13 @@ public class AddingToListsTest {
     public void addDriverTest() {
         //given
         TransportCompany transportCompany = new TransportCompany();
-        CarDriver carDriver1 = new CarDriver("Mariusz", "Janowski");
+        CarDriver carDriver1 = new CarDriver("Mariusz", "Janowski","333243214");
 
         //when
         transportCompany.addCarDriver(carDriver1);
 
         //then
-        assertTrue(transportCompany.getCarDriverList().contains(carDriver1));
+        assertTrue(transportCompany.getCarDriverHashSet().contains(carDriver1));
 
     }
 
@@ -22,13 +25,13 @@ public class AddingToListsTest {
     public void addCarTest() {
         //given
         TransportCompany transportCompany = new TransportCompany();
-        Car car1 = new Car("Volvo");
+        Car car1 = new Car("Volvo","324321212");
 
         //when
         transportCompany.addCar(car1);
 
         //then
-        assertTrue(transportCompany.getCarList().contains(car1));
+        assertTrue(transportCompany.getCarHashSet().contains(car1));
 
     }
 }

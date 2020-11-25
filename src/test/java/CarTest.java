@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import transportcompany.Car;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,7 +11,7 @@ public class CarTest {
         Car car1;
 
         //when
-        car1 = new Car("Mazda");
+        car1 = new Car("Mazda","WK74242");
 
         //then
         assertEquals(7, car1.getPlateNumber().length());

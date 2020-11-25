@@ -1,30 +1,35 @@
+package transportcompany;
+
 import lombok.*;
 
-import java.awt.dnd.DragGestureEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Getter
-@ToString
+
 public class TransportCompany {
 
-    private List<CarDriver> carDriverList;
-    private List<Car> carList;
+    private Set<CarDriver> carDriverHashSet;
+    private Set<Car> carHashSet;
     private HashMap<Car, CarDriver> map;
+    private JDBC jdbc;
 
     public TransportCompany() {
-        this.carDriverList = new ArrayList<>();
-        this.carList = new ArrayList<>();
+        jdbc = new JDBC();
+        jdbc.createTables();
+        this.carDriverHashSet = jdbc.getDriversFromDB();
+        this.carHashSet = jdbc.getCarsFromDB();
         this.map = new HashMap<>();
+
     }
 
     public boolean addCarDriver( CarDriver carDriver ) {
-        return carDriverList.add(carDriver);
+        jdbc.addToDriver(carDriver.getName(), carDriver.getSurname(), carDriver.getPesel());
+        return carDriverHashSet.add(carDriver);
     }
 
     public boolean addCar( Car car ) {
-        return carList.add(car);
+        jdbc.addToCar(car.getBrand(), car.getPlateNumber());
+        return carHashSet.add(car);
     }
 
     public void addToMap( Car car, CarDriver carDriver ) {
@@ -32,19 +37,18 @@ public class TransportCompany {
             map.putIfAbsent(car, carDriver);
         } else if (carDriver == null)
             System.out.println("Brak takiego kierowcy");
-        else if (car==null){
+        else if (car == null) {
             System.out.println("Brak takiego samochodu");
-        }
-        else System.out.println("Brak takiego samochodu i kierowcy");
+        } else System.out.println("Brak takiego samochodu i kierowcy");
     }
 
     public void replaceDriver( Car car, CarDriver carDriver ) {
         map.replace(car, carDriver);
     }
 
-    public CarDriver getDriver( String name, String surname ) {
-        CarDriver driver = new CarDriver(name, surname);
-        for (CarDriver d : carDriverList) {
+    public CarDriver getDriver( String name, String surname, String pesel ) {
+        CarDriver driver = new CarDriver(name, surname, pesel);
+        for (CarDriver d : carDriverHashSet) {
             if (d.equals(driver)) {
                 return d;
             }
@@ -54,7 +58,7 @@ public class TransportCompany {
 
     public Car getCar( String brand, String plate ) {
 
-        for (Car c : carList) {
+        for (Car c : carHashSet) {
             if (brand.equals(c.getBrand()) && plate.equals(c.getPlateNumber())) {
                 return c;
             }
@@ -62,12 +66,18 @@ public class TransportCompany {
         return null;
     }
 
+    public void addListToCarsTable() {
+        for (Car c : carHashSet) {
+            jdbc.addToCar(c.getBrand(), c.getPlateNumber());
+        }
+    }
+
     public void printCars() {
-        System.out.println(carList);
+        System.out.println(carHashSet);
     }
 
     public void printCarDrivers() {
-        System.out.println(carDriverList);
+        System.out.println(carDriverHashSet);
     }
 
     public void printMap() {

@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.*;
+import transportcompany.Car;
+import transportcompany.CarDriver;
+import transportcompany.TransportCompany;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,10 +17,10 @@ public class MapTest {
     @BeforeAll
     public static void init() {
         transportCompany = new TransportCompany();
-        carDriver1 = new CarDriver("Adam", "Kowalski");
-        carDriver2 = new CarDriver("Jan", "Matuszewski");
-        car1 = new Car("Volvo");
-        car2 = new Car("Fiat");
+        carDriver1 = new CarDriver("Adam", "Kowalski","33214134314");
+        carDriver2 = new CarDriver("Jan", "Matuszewski","32432143214");
+        car1 = new Car("Volvo","ddaada");
+        car2 = new Car("Fiat","dsadsa");
     }
 
 
