@@ -38,7 +38,7 @@ public class JDBC {
 
     public boolean createTables() {
         String createCars = "CREATE TABLE IF NOT EXISTS cars (carID INTEGER PRIMARY KEY, brand STRING, plate_nr STRING type UNIQUE)";
-        String createCarDrivers = "CREATE TABLE IF NOT EXISTS drivers (driverID INTEGER PRIMARY KEY, name STRING, surname STRING, pesel STRING type UNIQUE)";
+        String createCarDrivers = "CREATE TABLE IF NOT EXISTS drivers (driverID INTEGER PRIMARY KEY, name STRING, surname STRING, pesel LONG type UNIQUE)";
         String createHashMap = "CREATE TABLE IF NOT EXISTS car_driver (recordID INTEGER PRIMARY KEY, carID INTEGER, driverID INTEGER)";
         try {
             statement.execute(createCars);
@@ -70,17 +70,20 @@ public class JDBC {
         return false;
     }
 
-    public boolean addToDriver( String name, String surname, String pesel ) {
-        try {
-            preparedStatement = connection.prepareStatement("insert into drivers values (NULL,?,?,?);");
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, surname);
-            preparedStatement.setString(3, pesel);
-            if (preparedStatement.execute()) {
-                return true;
+    public boolean addToDriver( String name, String surname, long pesel ) {
+        if(peselValidator(pesel)) {
+            try {
+                preparedStatement = connection.prepareStatement("insert into drivers values (NULL,?,?,?);");
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, surname);
+                preparedStatement.setLong(3, pesel);
+                if (preparedStatement.execute()) {
+                    return true;
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            return true;
         }
         return false;
     }
@@ -97,7 +100,7 @@ public class JDBC {
                 int id = resultSet.getInt("driverID");
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
-                String pesel = resultSet.getString("pesel");
+                long pesel = resultSet.getLong("pesel");
                 carDriver = new CarDriver(name, surname, pesel);
                 carDriver.setId(id);
                 drivers.add(carDriver);
@@ -128,5 +131,15 @@ public class JDBC {
             System.out.println(e.getMessage());
         }
         return cars;
+    }
+    public boolean peselValidator( long pesel ) {
+        String psl = String.valueOf(pesel);
+        if (psl.length() != 11) {
+            return false;
+        }
+        if (psl.charAt(0) < '3') {
+            return false;
+        }
+        return true;
     }
 }

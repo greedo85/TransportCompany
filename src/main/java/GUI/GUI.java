@@ -41,11 +41,12 @@ public class GUI extends Application {
         stage.show();
         boxElements.getAddDriverButton().setOnAction(driver -> {
 
-            if (tableElements.addToDriver(boxElements.getTextField1().getText(), boxElements.getTextField2().getText(), boxElements.getTextField3().getText())) {
+            if (tableElements.addToDriver(boxElements.getTextField1().getText(), boxElements.getTextField2().getText(),
+                Long.valueOf(boxElements.getTextField3().getText()))) {
                 textArea.clear();
                 textArea.appendText("Dodałem kierowcę\n");
             } else
-                textArea.appendText("Nie mogę dodać kierowcy, już istnieje\n");
+                textArea.appendText("Błędny pesel\n");
 
         });
         boxElements.getAddCarButton().setOnAction(car -> {
