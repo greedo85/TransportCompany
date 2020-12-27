@@ -37,7 +37,23 @@
   <version>1.18.14</version>
   <scope>provided</scope>
 </dependency>
-</dependencies>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.13.1</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.xerial</groupId>
+          <artifactId>sqlite-jdbc</artifactId>
+          <version>3.32.3.2</version>
+      </dependency>
+      <dependency>
+          <groupId>com.google.truth</groupId>
+          <artifactId>truth</artifactId>
+          <version>1.1</version>
+      </dependency>
+  </dependencies>
 
 <build>
 	<plugins>
