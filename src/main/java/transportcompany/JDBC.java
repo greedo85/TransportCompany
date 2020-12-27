@@ -38,7 +38,7 @@ public class JDBC {
 
     public boolean createTables() {
         String createCars = "CREATE TABLE IF NOT EXISTS cars (carID INTEGER PRIMARY KEY, brand STRING, plate_nr STRING type UNIQUE)";
-        String createCarDrivers = "CREATE TABLE IF NOT EXISTS drivers (driverID INTEGER PRIMARY KEY, name STRING, surname STRING, pesel STRING type UNIQUE)";
+        String createCarDrivers = "CREATE TABLE IF NOT EXISTS drivers (driverID INTEGER PRIMARY KEY, name STRING, surname STRING, pesel LONG type UNIQUE)";
         String createHashMap = "CREATE TABLE IF NOT EXISTS car_driver (recordID INTEGER PRIMARY KEY, carID INTEGER, driverID INTEGER)";
         try {
             statement.execute(createCars);
@@ -56,41 +56,54 @@ public class JDBC {
 
     }
 
-    public void addToCar( String brand, String plate ) {
+    public boolean addToCar( String brand, String plate ) {
         try {
             preparedStatement = connection.prepareStatement("insert into cars values (NULL,?,?);");
             preparedStatement.setString(1, brand);
             preparedStatement.setString(2, plate);
-            preparedStatement.execute();
+            if (preparedStatement.execute()) {
+                return true;
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
-    public void addToDriver( String name, String surname, String pesel ) {
-        try {
-            preparedStatement = connection.prepareStatement("insert into drivers values (NULL,?,?,?);");
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, surname);
-            preparedStatement.setString(3, pesel);
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public boolean addToDriver( String name, String surname, long pesel ) {
+        if(peselValidator(pesel)) {
+            try {
+                preparedStatement = connection.prepareStatement("insert into drivers values (NULL,?,?,?);");
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, surname);
+                preparedStatement.setLong(3, pesel);
+                if (preparedStatement.execute()) {
+                    return true;
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return true;
         }
+        return false;
     }
-    //public void addToCarDriver(int carID, int Ca)
+
 
     public Set getDriversFromDB() {
         Set<CarDriver> drivers = new HashSet<>();
-        String getFromDrivers = "SELECT name, surname, pesel FROM drivers";
+        String getFromDrivers = "SELECT driverID, name, surname, pesel FROM drivers";
+        CarDriver carDriver;
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(getFromDrivers);
             while (resultSet.next()) {
+                int id = resultSet.getInt("driverID");
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
-                String pesel = resultSet.getString("pesel");
-                drivers.add(new CarDriver(name, surname, pesel));
+                long pesel = resultSet.getLong("pesel");
+                carDriver = new CarDriver(name, surname, pesel);
+                carDriver.setId(id);
+                drivers.add(carDriver);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -100,20 +113,33 @@ public class JDBC {
 
     public Set getCarsFromDB() {
         Set<Car> cars = new HashSet<>();
-        String getFromDrivers = "SELECT brand, plate_nr FROM cars";
+        String getFromDrivers = "SELECT carID, brand, plate_nr FROM cars";
+        Car car;
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(getFromDrivers);
 
             while (resultSet.next()) {
+                int id=resultSet.getInt("carID");
                 String brand = resultSet.getString("brand");
                 String plate_nr = resultSet.getString("plate_nr");
-
-                cars.add(new Car(brand, plate_nr));
+                car =new Car(brand,plate_nr);
+                car.setId(id);
+                cars.add(car);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return cars;
+    }
+    public boolean peselValidator( long pesel ) {
+        String psl = String.valueOf(pesel);
+        if (psl.length() != 11) {
+            return false;
+        }
+        if (psl.charAt(0) < '3') {
+            return false;
+        }
+        return true;
     }
 }

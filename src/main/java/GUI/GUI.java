@@ -5,8 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import transportcompany.Car;
-import transportcompany.CarDriver;
 
 import java.util.Collection;
 
@@ -14,22 +12,24 @@ import java.util.Collection;
 public class GUI extends Application {
 
     private TextArea textArea;
-    private TableElements tableElements;
+    private GUITableElements tableElements;
+    private GUIBoxElements boxElements;
     private Scene scene;
     private BorderPane borderPane;
 
 
     public GUI() {
 
-        tableElements = new TableElements();
+        tableElements = new GUITableElements();
+        boxElements=new GUIBoxElements();
         //dodajemy layout
         borderPane = new BorderPane();
         textArea = new TextArea();
         textArea.setMaxWidth(670);
         //ustawiamy elementy layoutu
-        borderPane.setTop(tableElements.getHBox());
-        borderPane.setLeft(tableElements.getVBoxDriver());
-        borderPane.setCenter(tableElements.getVBoxCar());
+        borderPane.setTop(boxElements.getHBox());
+        borderPane.setLeft(boxElements.getVBoxDriver());
+        borderPane.setCenter(boxElements.getVBoxCar());
         borderPane.setBottom(textArea);
     }
 
@@ -39,34 +39,34 @@ public class GUI extends Application {
         scene = new Scene(borderPane, 670, 500);
         stage.setScene(scene);
         stage.show();
-        tableElements.getAddDriverButton().setOnAction(driver -> {
+        boxElements.getAddDriverButton().setOnAction(driver -> {
 
-            if (tableElements.addCarDriver(new CarDriver(
-                    tableElements.getTextField1().getText(), tableElements.getTextField2().getText(), tableElements.getTextField3().getText()))) {
+            if (tableElements.addToDriver(boxElements.getTextField1().getText(), boxElements.getTextField2().getText(),
+                Long.valueOf(boxElements.getTextField3().getText()))) {
                 textArea.clear();
-                textArea.appendText("Dodałem kierowcę");
+                textArea.appendText("Dodałem kierowcę\n");
             } else
-                textArea.appendText("Nie mogę dodać kierowcy, już istnieje");
+                textArea.appendText("Błędny pesel\n");
 
         });
-        tableElements.getAddCarButton().setOnAction(car -> {
-            if ((tableElements.addCar(new Car(tableElements.getTextField4().getText(), tableElements.getTextField5().getText())))) {
+        boxElements.getAddCarButton().setOnAction(car -> {
+            if (tableElements.addToCar(boxElements.getTextField4().getText(), boxElements.getTextField5().getText())) {
                 textArea.clear();
-                textArea.appendText("Dodałem samochód");
+                textArea.appendText("Dodałem samochód\n");
             } else
-                textArea.appendText("Nie mogę dodać samochodu");
+                textArea.appendText("Nie mogę dodać samochodu\n");
 
         });
-        tableElements.getClearTextAreaButton().setOnAction(x -> clearTextArea());
-        tableElements.getShowDriverInTableButton().setOnAction(x ->
+        boxElements.getClearTextAreaButton().setOnAction(x -> clearTextArea());
+        boxElements.getShowDriverInTableButton().setOnAction(x ->
         {
             borderPane.setRight(tableElements.getCarDriverTableView());
-            setTextArea(tableElements.getCarDriverHashSet());
+            setTextArea(tableElements.getDriversFromDB());
         });
-        tableElements.getShowCarsInTable().setOnAction(c ->
+        boxElements.getShowCarsInTable().setOnAction(c ->
         {
             borderPane.setRight(tableElements.getCarTableView());
-            setTextArea(tableElements.getCarHashSet());
+            setTextArea(tableElements.getCarsFromDB());
         });
 
     }
